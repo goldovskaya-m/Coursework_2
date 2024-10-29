@@ -19,7 +19,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         this.questionService = questionService;
     }
     @Override
-    public Collection<Question> getQuestions(int amount) {
+    public Collection<Question>getQuestions(int amount) {
         if (amount < 0 || amount > questionService.getAll().size()){
             throw new QuestionAmountMismatchException(amount);
     }

@@ -16,9 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static pro.sky.Coursework_2.TestData.*;
 
 public class JavaQuestionServiceTest {
-
     private final JavaQuestionService javaQuestionService = new JavaQuestionService();
-
 
     @Test
     void shouldAddQuestion_WhenCorrectQuestion_ThenAdd() {
@@ -76,8 +74,8 @@ public class JavaQuestionServiceTest {
     @Test
     void shouldReturnAllQuestions() {
         javaQuestionService.add(RANDOM_QUESTION_1);
-        javaQuestionService.add(RANDOM_QUESTION_1);
-        javaQuestionService.add(RANDOM_QUESTION_1);
+        javaQuestionService.add(RANDOM_QUESTION_2);
+        javaQuestionService.add(RANDOM_QUESTION_3);
         //test
         Collection<Question> actual = javaQuestionService.getAll();
         //check

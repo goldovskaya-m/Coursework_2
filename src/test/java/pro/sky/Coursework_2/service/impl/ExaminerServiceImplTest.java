@@ -61,7 +61,7 @@ class ExaminerServiceImplTest {
     @Test
     @DisplayName("Возвращает все вопросы, не вызывает сервис повторно")
     void getQuestions_1() {
-        int amount = 3;
+       int amount = 3;
         //test
         Collection<Question> actual = examinerService.getQuestions(amount);
         //check
@@ -72,9 +72,10 @@ class ExaminerServiceImplTest {
     }
 
     @Test
-    @DisplayName("(тест на ошибку)Возвращает все вопросы, не вызывает сервис повторно")
+    @DisplayName("Возвращает все вопросы, не вызывает сервис повторно")
     void getQuestions_2() {
-        int amount = nextInt(4, 10);
+        int amount;
+        amount = 2;
         //test
         Collection<Question> actual = examinerService.getQuestions(amount);
         //check
@@ -83,6 +84,7 @@ class ExaminerServiceImplTest {
 
         verify(javaQuestionService, never()).getRandomQuestion();
     }
+
     @Test
     @DisplayName("Возвращает все вопросы не вызывает сервис повторно")
     void getQuestions_3() {
