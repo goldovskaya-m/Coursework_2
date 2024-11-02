@@ -3,6 +3,7 @@ package pro.sky.Coursework_2.service.impl;
 import com.github.javafaker.Faker;
 import org.assertj.core.api.AbstractBigDecimalAssert;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import pro.sky.Coursework_2.exception.QuestionNotFoundException;
 import pro.sky.Coursework_2.model.Question;
 
@@ -84,6 +85,7 @@ public class JavaQuestionServiceTest {
     }
 
     @Test
+
     void getReturnRandomQuestion() {
         javaQuestionService.add(RANDOM_QUESTION_1);
         javaQuestionService.add(RANDOM_QUESTION_2);

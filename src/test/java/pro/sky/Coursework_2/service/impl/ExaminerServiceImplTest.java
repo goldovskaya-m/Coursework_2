@@ -13,9 +13,9 @@ import pro.sky.Coursework_2.model.Question;
 
 import java.util.Collection;
 
+
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static pro.sky.Coursework_2.TestData.*;
@@ -55,42 +55,32 @@ class ExaminerServiceImplTest {
         assertThat(getAll()).containsAnyElementsOf(actual);
 
         verify(javaQuestionService, times(1)).getAll();
-        verify(javaQuestionService, times(amount)).getRandomQuestion();
+        verify(javaQuestionService, times(amount))
+                .getRandomQuestion();
     }
 
     @Test
-    @DisplayName("Возвращает все вопросы, не вызывает сервис повторно")
+    @DisplayName("Возвращает все 3 вопроса, не вызывает сервис повторно")
     void getQuestions_1() {
-       int amount = 3;
+        int amount = 3;
+
         //test
         Collection<Question> actual = examinerService.getQuestions(amount);
         //check
         assertThat(getAll()).containsAnyElementsOf(actual);
-
+        verify(javaQuestionService, times(1)).getAll();
 
         verify(javaQuestionService, never()).getRandomQuestion();
     }
 
+
     @Test
-    @DisplayName("Возвращает все вопросы, не вызывает сервис повторно")
+    @DisplayName("тест на ошибку Возвращает все вопросы не вызывает сервис повторно")
     void getQuestions_2() {
-        int amount;
-        amount = 2;
-        //test
-        Collection<Question> actual = examinerService.getQuestions(amount);
-        //check
-        assertThat(getAll()).containsAnyElementsOf(actual);
-
-
-        verify(javaQuestionService, never()).getRandomQuestion();
-    }
-
-    @Test
-    @DisplayName("Возвращает все вопросы не вызывает сервис повторно")
-    void getQuestions_3() {
+        int amount = nextInt(4, 10);
         //test
         assertThatExceptionOfType(QuestionAmountMismatchException.class)
-                .isThrownBy(() -> examinerService.getQuestions(4));
+                .isThrownBy(() -> examinerService.getQuestions(nextInt()));
     }
 
 }

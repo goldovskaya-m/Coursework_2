@@ -6,6 +6,7 @@ import pro.sky.Coursework_2.model.Question;
 import pro.sky.Coursework_2.service.ExaminerService;
 import pro.sky.Coursework_2.service.QuestionService;
 
+import java.sql.SQLOutput;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,15 +19,24 @@ public class ExaminerServiceImpl implements ExaminerService {
     public ExaminerServiceImpl(QuestionService questionService) {
         this.questionService = questionService;
     }
+
     @Override
-    public Collection<Question>getQuestions(int amount) {
-        if (amount < 0 || amount > questionService.getAll().size()){
+    public Collection<Question> getQuestions(int amount) {
+        long start = System.currentTimeMillis();
+        Collection<Question> allQuestions = questionService.getAll();
+        if (amount < 0 || amount > allQuestions.size()) {
             throw new QuestionAmountMismatchException(amount);
-    }
-        Set<Question> resultList = new HashSet<>();
-        while (resultList.size() < amount) {
-            resultList.add(questionService.getRandomQuestion());
         }
-        return resultList;
+        if (amount == allQuestions.size()) {
+            return allQuestions;
+        }
+            Set<Question> resultSet = new HashSet<>();
+            while (resultSet.size() < amount) {
+                resultSet.add(questionService.getRandomQuestion());
+            }
+        System.out.println(System.currentTimeMillis() - start);
+            return resultSet;
+        }
+
     }
-}
+
